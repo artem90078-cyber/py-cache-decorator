@@ -1,12 +1,12 @@
-from typing import Callable
+from typing import Callable, Any
 from functools import wraps
 
 
 def cache(func: Callable) -> Callable:
-    cache_storage = {}
+    cache_storage: dict[tuple[Any, ...], Any] = {}
 
     @wraps(func)
-    def wrapper(*args):
+    def wrapper(*args: Any) -> Any:
         if args in cache_storage:
             print("Getting from cache")
             return cache_storage[args]
